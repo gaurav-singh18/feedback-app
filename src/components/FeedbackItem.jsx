@@ -7,7 +7,7 @@ function FeedbackItem({item,handleDelete}) {
     <Card >
     <div className='num-display'>{item.rating}</div>
     <button className="close" onClick={()=>handleDelete(item.id)}>
-      <FaTrashAlt color='white'/>
+      <FaTrashAlt color='black'/>
     </button>
       <div className='text-display'>{item.text}</div>
     </Card>

@@ -7,6 +7,7 @@ import FeedbackData from './data/FeedbackData'
 import FeedbackStats from './components/FeedbackStats'
 import FeedbackForm from './components/FeedbackForm'
 import AboutPage from './pages/AboutPage';
+import {FeedbackProvider} from './context/FeedbackContext'
 import AboutIconLink from "./components/AboutIconLink";
 
 
@@ -24,6 +25,7 @@ function App() {
     }//using a higher order function:filter , it returns an array minus the one we are deleting
   }
   return (
+    <FeedbackProvider>
     <BrowserRouter>
     
         <Header />
@@ -42,7 +44,7 @@ function App() {
         </div>
         <AboutIconLink />
     </BrowserRouter>
-        
+    </FeedbackProvider>
   )
 }
 

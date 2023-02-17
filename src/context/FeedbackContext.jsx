@@ -25,11 +25,15 @@ export const FeedbackProvider = ({ children }) => {
     edit: false, // button press= set edit mode on and bool value becomes true
   });
 
-  const deleteFeedback = (id) => {
+  //delete feedback
+  const deleteFeedback = async (id) => {
     if (window.confirm("Are you sure you want to delete?")) {
+      await fetch(`/feedback/${id}`, { method: "DELETE" });
       setFeedback(feedback.filter((item) => item.id !== id));
     } //using a higher order function:filter , it returns an array minus the one we are deleting
   };
+
+  //add feedback
   const addFeedback = async (newFeedback) => {
     const response = await fetch("/feedback", {
       method: "POST",
@@ -44,9 +48,17 @@ export const FeedbackProvider = ({ children }) => {
   };
 
   //Update Feedback item
-  const updateFeedback = (id, updItem) => {
+  const updateFeedback = async (id, updItem) => {
+    const response = await fetch(`/feedback/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updItem),
+    });
+    const data = await response.json();
     setFeedback(
-      feedback.map((item) => (item.id === id ? { ...item, ...updItem } : item))
+      feedback.map((item) => (item.id === id ? { ...item, ...data } : item))
     );
   };
 
